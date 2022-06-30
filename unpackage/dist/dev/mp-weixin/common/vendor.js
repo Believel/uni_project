@@ -1,11 +1,4 @@
 "use strict";
-var _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
-  }
-  return target;
-};
 function makeMap(str, expectsLowerCase) {
   const map = /* @__PURE__ */ Object.create(null);
   const list = str.split(",");
@@ -1048,6 +1041,13 @@ var protocols = /* @__PURE__ */ Object.freeze({
   showActionSheet
 });
 var index = initUni(shims, protocols);
+var _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target[key] = val;
+  }
+  return target;
+};
 const ON_SHOW$1 = "onShow";
 const ON_HIDE$1 = "onHide";
 const ON_LAUNCH$1 = "onLaunch";
@@ -5715,6 +5715,68 @@ const createSubpackageApp = initCreateSubpackageApp();
   wx.createPluginApp = global.createPluginApp = createPluginApp;
   wx.createSubpackageApp = global.createSubpackageApp = createSubpackageApp;
 }
+class Request {
+  constructor(options = {}) {
+    this.baseUrl = options.baseUrl || "";
+    this.url = options.url || "";
+    this.method = "GET";
+    this.data = null;
+    this.header = options.header || {};
+    this.beforeRequest = null;
+    this.afterRequest = null;
+  }
+  get(url, data = {}) {
+    this.method = "GET";
+    this.url = this.baseUrl + url;
+    this.data = data;
+    return this._();
+  }
+  post(url, data = {}) {
+    this.method = "POST";
+    this.url = this.baseUrl + url;
+    this.data = data;
+    return this._();
+  }
+  put(url, data = {}) {
+    this.method = "PUT";
+    this.url = this.baseUrl + url;
+    this.data = data;
+    return this._();
+  }
+  delete(url, data = {}) {
+    this.method = "DELETE";
+    this.url = this.baseUrl + url;
+    this.data = data;
+    return this._();
+  }
+  _() {
+    this.header = {};
+    this.beforeRequest && typeof this.beforeRequest === "function" && this.beforeRequest(this);
+    return new Promise((resolve2, reject) => {
+      let weixin = wx;
+      if (typeof index !== "undefined") {
+        weixin = index;
+      }
+      weixin.request({
+        url: this.url,
+        method: this.method,
+        data: this.data,
+        header: this.header,
+        success: (res) => {
+          resolve2(res);
+        },
+        fail: (err) => {
+          reject(err);
+        },
+        complete: (res) => {
+          this.afterRequest && typeof this.afterRequest === "function" && this.afterRequest(res);
+        }
+      });
+    });
+  }
+}
+const $http = new Request();
+exports.$http = $http;
 exports._export_sfc = _export_sfc;
 exports.createSSRApp = createSSRApp;
 exports.e = e;

@@ -9,6 +9,8 @@ if (!Math) {
   "./pages/cate/cate.js";
   "./pages/cart/cart.js";
   "./pages/my/my.js";
+  "./subpkg/goods_detail/goods_detail.js";
+  "./subpkg/goods_list/goods_list.js";
 }
 const _sfc_main = {
   onLaunch: function() {
@@ -23,6 +25,23 @@ const _sfc_main = {
   }
 };
 var App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "C:/Users/tgd/Desktop/uni_project/App.vue"]]);
+common_vendor.index.$http = common_vendor.$http;
+common_vendor.$http.baseUrl = "https://www.uinav.com";
+common_vendor.$http.beforeRequest = function(options) {
+  common_vendor.index.showLoading({
+    title: "\u6570\u636E\u52A0\u8F7D\u4E2D..."
+  });
+};
+common_vendor.$http.afterRequest = function() {
+  common_vendor.index.hideLoading();
+};
+common_vendor.index.$showMsg = function(title = "\u6570\u636E\u52A0\u8F7D\u5931\u8D25", duration = 1500) {
+  common_vendor.index.showToast({
+    title,
+    duration,
+    icon: "none"
+  });
+};
 function createApp() {
   const app = common_vendor.createSSRApp(App);
   return {
