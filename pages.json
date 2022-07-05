@@ -1,6 +1,15 @@
 {
 	"pages": [
 		{
+		    "path" : "pages/cate/cate",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "分类",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
 		    "path" : "pages/home/home",
 		    "style" :                                                                                    
 		    {
@@ -20,15 +29,6 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "新闻详情",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/cate/cate",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "分类",
                 "enablePullDownRefresh": false
             }
             
