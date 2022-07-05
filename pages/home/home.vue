@@ -1,5 +1,8 @@
 <template>
 	<view>
+		<view class="search-box">
+			<my-search @click="gotoSearch"></my-search>
+		</view>
 		<uni-swiper-dot class="uni-swiper-dot-box" @clickItem="clickItem" :info="swiperList" :current="current" :mode="mode" field="content">
 			<swiper class="swiper-box" @change="change" :current="swiperDotIndex">
 				<swiper-item v-for="(item, index) in swiperList" :key="index">
@@ -41,7 +44,11 @@
 </template>
 
 <script>
+	import MySearch from '../../components/my-search.vue'
 	export default {
+		components: {
+			MySearch
+		},
 		data() {
 			return {
 				swiperList: [],
@@ -100,12 +107,26 @@
 					return floor
 				})
 				this.floorList = res.message
+			},
+			// 跳转到分包中的搜索页面
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpkg/search/search'
+				})
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
+	.search-box {
+		// 设置定位效果为“吸顶”
+		position: sticky;
+		// 吸顶的位置
+		top: 0;
+		// 提高层级，放置轮播图覆盖
+		z-index: 999;
+	}
 	.swiper-box {
 		height: 330rpx;
 	}

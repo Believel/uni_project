@@ -1,6 +1,8 @@
 <template>
 	<view>
-		<view class="scroll-view-container">
+		<!-- 自定义搜素框组件 -->
+		<my-search @click="gotoSearch"></my-search>
+		<view class="scroll-view-container">  
 		  <!-- 左侧的滚动视图区域 -->
 		  <scroll-view class="left-scroll-view" scroll-y :style="{height: wh + 'px'}">
 			<block v-for="(item, i) in cateList" :key="i">
@@ -28,7 +30,11 @@
 </template>
 
 <script>
+	import MySearch from '../../components/my-search.vue'
 	export default {
+		components: {
+			MySearch
+		},
 		data() {
 			return {
 				// 窗口可用的高度 = 屏幕高度 - navigationBar高度 - tabBar高度
@@ -47,7 +53,7 @@
 			// 获取当前系统的信息
 			const sysInfo = uni.getSystemInfoSync()
 			console.log(sysInfo)
-			this.wh = sysInfo.windowHeight
+			this.wh = sysInfo.windowHeight - 50
 			this.getCateList()
 		},
 		methods: {
@@ -72,6 +78,12 @@
 			gotoGoodsList(data) {
 				uni.navigateTo({
 					url: `/subpkg/goods_list/goods_list?cid=${data.cat_id}`
+				})
+			},
+			// 跳转到分包中的搜索页面
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpkg/search/search'
 				})
 			}
 		}
