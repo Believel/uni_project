@@ -3,12 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports[Symbol.toStringTag] = "Module";
 var common_vendor = require("./common/vendor.js");
 if (!Math) {
-  "./pages/cate/cate.js";
   "./pages/home/home.js";
+  "./pages/cate/cate.js";
   "./pages/index/index.js";
   "./pages/info/info.js";
   "./pages/cart/cart.js";
   "./pages/my/my.js";
+  "./components/my-search/my-search.js";
+  "./components/my-goods/my-goods.js";
   "./subpkg/goods_detail/goods_detail.js";
   "./subpkg/goods_list/goods_list.js";
   "./subpkg/search/search.js";

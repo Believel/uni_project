@@ -30,11 +30,7 @@
 </template>
 
 <script>
-	import MySearch from '../../components/my-search.vue'
 	export default {
-		components: {
-			MySearch
-		},
 		data() {
 			return {
 				// 窗口可用的高度 = 屏幕高度 - navigationBar高度 - tabBar高度

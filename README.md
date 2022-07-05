@@ -52,3 +52,20 @@
 	}
 	```
 	* 今后在使用时直接用`uni.$showMsg()`方法即可
+4. 持久化本地存储
+```js
+// 设置持久化本地存储
+uni.setStorageSync('kw', JSON.stringify(data))
+// 获取持久化本地存储对应数据：string
+uni.getStorageSync('kw')
+```
+5. 获取当前系统信息
+```js
+uni.getSystemInfoSync()
+```
+6. vue中的过滤器在小程序不能生效
+7. 定义组件
+	* 在目录`components`下按照`component/componentName/componentName.vue`定义，可以在使用的时候直接使用，不用再引入
+8. 上拉加载更多&下拉刷新
+
+> 代码在`/subpkg/goods_list/goods_list.vue`页面

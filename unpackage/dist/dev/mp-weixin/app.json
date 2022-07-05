@@ -1,11 +1,13 @@
 {
   "pages": [
-    "pages/cate/cate",
     "pages/home/home",
+    "pages/cate/cate",
     "pages/index/index",
     "pages/info/info",
     "pages/cart/cart",
-    "pages/my/my"
+    "pages/my/my",
+    "components/my-search/my-search",
+    "components/my-goods/my-goods"
   ],
   "subPackages": [
     {
