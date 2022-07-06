@@ -22,7 +22,7 @@
 		    </view>
 		  </view>
 		  <!-- 运费 -->
-		  <view class="yf">快递：免运费</view>
+		  <view class="yf">快递：免运费{{cart.length}}</view>
 		</view>
 		<!-- 商品详情信息 -->
 		<rich-text :nodes="goods_info.goods_introduce"></rich-text>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+	import { mapState, mapMutations, mapGetters } from 'vuex'
 	export default {
 		data() {
 			return {
@@ -59,7 +60,7 @@
 				}, {
 					icon: 'cart',
 					text: '购物车',
-					info: 2
+					info: 0
 				}],
 				// 右侧按钮组配置项
 				buttonGroup: [{
@@ -74,6 +75,27 @@
 					}
 				],
 			};
+		},
+		computed: {
+			// 参数1：模块的名称	
+			// 参数2： [要映射的数据名称1，...]
+			// 使用的时候，可以直接使用映射的数据：this.cart
+			...mapState('m_cart', {
+				cart: state => state.cart
+			}),
+			...mapGetters('m_cart', ['total'])
+		},
+		watch: {
+			total: {
+				immediate: true,
+				handler(newVal) {
+					const findCartBtn = this.options.find(x => x.text === '购物车')
+					if (findCartBtn) {
+						// 动态给购物车按钮的徽章赋值
+						findCartBtn.info = newVal
+					}
+				}
+			}
 		},
 		onLoad(options) {
 			const goods_id = options.goods_id
@@ -129,8 +151,20 @@
 				// 		color: '#fff'
 				// 	}
 				// }
-				console.log(e)
-			}
+				if (e.content.text === '加入购物车') {
+					const goods = {
+						goods_id: this.goods_info.goods_id,
+						goods_id: this.goods_info.goods_id,       // 商品的Id
+						goods_name: this.goods_info.goods_name,   // 商品的名称
+						goods_price: this.goods_info.goods_price, // 商品的价格
+						goods_count: 1,                           // 商品的数量
+						goods_small_logo: this.goods_info.goods_small_logo, // 商品的图片
+						goods_state: true                         // 商品的勾选状态
+					}
+					this.addToCart(goods)
+				}
+			},
+			...mapMutations('m_cart', ['addToCart'])
 		}
 	}
 </script>

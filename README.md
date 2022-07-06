@@ -69,3 +69,11 @@ uni.getSystemInfoSync()
 8. 上拉加载更多&下拉刷新
 
 > 代码在`/subpkg/goods_list/goods_list.vue`页面
+
+9. 为tabBar动态设置徽章
+```js
+uni.setTabBarBadge({
+	index: 2, // 索引
+	text: this.total + '' // // 注意：text 的值必须是字符串，不能是数字
+})
+```
