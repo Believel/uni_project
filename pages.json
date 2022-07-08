@@ -69,6 +69,15 @@
             }
             
         }
+        ,{
+            "path" : "components/my-address/my-address",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"subPackages": [
 		{

@@ -24,6 +24,27 @@ export default {
 		// 将购物车信息持久化本地存储
 		saveToStorage(state) {
 			uni.setStorageSync('cart', JSON.stringify(state.cart))
+		},
+		// 更新购物车中商品的勾选状态
+		updateGoodsState(state, goods) {
+			const findGoods = state.cart.find(x => x.goods_id === goods.goods_id)
+			if (findGoods) {
+				findGoods.goods_state = goods.goods_state
+				this.commit('m_cart/saveToStorage')
+			}
+		},
+		// 更新商品数量
+		updateGoodsCount(state, goods) {
+			const findGoods = state.cart.find(x => x.goods_id === goods.goods_id)
+			if (findGoods) {
+				findGoods.goods_count = goods.goods_count
+				this.commit('m_cart/saveToStorage')
+			}
+		},
+		// 根据 Id 从购物车中删除对应的商品信息
+		removeGoodsById(state, goods_id) {
+			start.cart = state.cart.filter(x => x.goods_id !== goods_id)
+			this.commit('m_cart/saveToStorage')
 		}
 	},
 	getters: {

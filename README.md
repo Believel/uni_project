@@ -77,3 +77,9 @@ uni.setTabBarBadge({
 	text: this.total + '' // // 注意：text 的值必须是字符串，不能是数字
 })
 ```
+10. 选择收货地址
+```js
+// 1. 调用小程序提供的 chooseAddress() 方法，即可使用选择收货地址的功能
+//    返回值是一个数组：第 1 项为错误对象；第 2 项为成功之后的收货地址对象
+const [err, succ] = await uni.chooseAddress().catch(err => err)
+```
