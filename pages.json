@@ -78,6 +78,15 @@
             }
             
         }
+        ,{
+            "path" : "components/my-settle/my-settle",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"subPackages": [
 		{

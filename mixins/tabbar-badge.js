@@ -8,6 +8,12 @@ export default {
 	computed: {
 		...mapGetters('m_cart', ['total'])
 	},
+	watch: {
+		// 监听 total 值的变化，重新设置购物车的徽标数目
+		total() {
+			this.setBadge()
+		}
+	},
 	methods: {
 		setBadge() {
 			uni.setTabBarBadge({

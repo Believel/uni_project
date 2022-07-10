@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="cart-container" v-if="cart.length !== 0">
 		<!-- 购物车商品列表的标题区域 -->
 		<view class="cart-title">
 		  <!-- 左侧的图标 -->
@@ -7,6 +7,8 @@
 		  <!-- 描述文本 -->
 		  <text class="cart-title-text">购物车</text>
 		</view>
+		<!-- 收获地址 -->
+		<my-address></my-address>
 		<!-- 商品列表区域 -->
 		<!-- uni-swipe-action 是最外层包裹性质的容器 -->
 		<uni-swipe-action>
@@ -17,6 +19,12 @@
 				</uni-swipe-action-item>
 			</block>
 		</uni-swipe-action>
+		<my-settle></my-settle>
+	</view>
+	 <!-- 空白购物车区域 -->
+	<view class="empty-cart" v-else>
+	    <image src="/static/cart_empty@2x.png" class="empty-img"></image>
+	    <text class="tip-text">空空如也~</text>
 	</view>
 </template>
 
@@ -42,7 +50,7 @@
 			// 点击了滑动操作按钮
 			swipeActionClickHandler(goods) {
 			  this.removeGoodsById(goods.goods_id)
-			}
+			},
 			// 商品数量发生变化
 			numChangeHandler(data) {
 				this.updateGoodsCount(data)
@@ -57,6 +65,9 @@
 </script>
 
 <style lang="scss">
+.cart-container {
+	padding-bottom: 50px;
+}
 .cart-title {
 	 height: 40px;
 	  display: flex;
@@ -67,5 +78,22 @@
 	  .cart-title-text {
 	    margin-left: 10px;
 	  }
+}
+.empty-cart {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 150px;
+
+	.empty-img {
+		width: 90px;
+		height: 90px;
+	}
+
+	.tip-text {
+		font-size: 12px;
+		color: gray;
+		margin-top: 15px;
+	}
 }
 </style>
