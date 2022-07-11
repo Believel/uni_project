@@ -87,6 +87,24 @@
             }
             
         }
+        ,{
+            "path" : "components/my-userinfo/my-userinfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "components/my-login/my-login",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"subPackages": [
 		{
