@@ -98,3 +98,7 @@ uni.openSetting({
 	}
 })
 ```
+12. 发起微信支付
+```js
+uni.requestPayment() 
+```
