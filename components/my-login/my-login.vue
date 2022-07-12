@@ -9,15 +9,18 @@
 </template>
 
 <script>
-	import { mapMutations } from 'vuex'
+	import { mapMutations, mapState } from 'vuex'
 	export default {
 		data() {
 			return {
 				
 			};
 		},
+		computed: {
+			...mapState('m_user', ['redirectInfo'])
+		},
 		methods: {
-			...mapMutations('m_user', ['updateUserInfo', 'updateToken']),
+			...mapMutations('m_user', ['updateUserInfo', 'updateToken', 'updateRedirectInfo']),
 			// 获取微信用户的基本信息
 			getUserInfo(e) {
 				// 判断是否获取用户信息成功
@@ -45,6 +48,7 @@
 						// 2. 更新 vuex 中的 token
 						this.updateToken(loginResult.message.token)
 						uni.$showMsg('登录成功')
+						this.navigateBack()
 					},
 					fail(err) {
 						uni.$showError('登录失败！')
@@ -52,6 +56,22 @@
 				})
 				
 			},
+			// 返回登录之前的页面
+			navigateBack() {
+				// redirectInfo 不为 null，并且导航方式为 switchTab
+				if (this.redirectInfo && this.redirectInfo.openType === 'switchTab') {
+				    // 调用小程序提供的 uni.switchTab() API 进行页面的导航
+				    uni.switchTab({
+				      // 要导航到的页面地址
+				      url: this.redirectInfo.from,
+					  // 接口调用结束时的回调函数（调用成功、失败都会执行）
+				      // 导航成功之后，把 vuex 中的 redirectInfo 对象重置为 null
+				      complete: () => {
+				        this.updateRedirectInfo(null)
+				      }
+				    })
+				}
+			}
 			
 		}
 	}
